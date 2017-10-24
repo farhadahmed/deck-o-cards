@@ -1,19 +1,18 @@
 // We'll start by creating an empty deck. Once we add cards, each card will have two 
 // properties: value and next. The last card's next will be null.
-
-function Deck() {
+module.exports.Deck = function() {
 	this.head = null;
 }
 
 // The isEmpty method will be useful for testing whether a deck was filled.
-Deck.prototype.isEmpty = function() {
+module.exports.Deck.prototype.isEmpty = function() {
 	if (this.head === null) {return true;}
 	return false;
 }
 
 // The size method is useful for verifying whether the deck was filled with the 
 // right number of cards; 52.
-Deck.prototype.size = function() {
+module.exports.Deck.prototype.size = function() {
 	if (this.isEmpty()) {return 0}
 
 	var current = this.head;
@@ -29,7 +28,7 @@ Deck.prototype.size = function() {
 
 // The print method will be useful for visualizing the deck and verifying that the
 // fill and shuffle methods are working as expected.
-Deck.prototype.print = function() {
+module.exports.Deck.prototype.print = function() {
 	if (this.isEmpty()) { return '[]'}
 	
 	var current = this.head;
@@ -48,7 +47,7 @@ Deck.prototype.print = function() {
 
 // The append method will be used to fill the deck. I have an array of card values that
 // I'll iterate through to append cards to a deck.
-Deck.prototype.append = function(val) {
+module.exports.Deck.prototype.append = function(val) {
 	var newNode = {
 		value: val,
 		next: null
@@ -69,14 +68,13 @@ Deck.prototype.append = function(val) {
 }
 
 // The fillDeck method will iterate through the cards array and append each node to the deck.
-Deck.prototype.fillDeck = function() {
+module.exports.Deck.prototype.fillDeck = function() {
 
 	for (var i=0; i<cards.length; i++) {
 		this.append(cards[i]);
 	};
 
 }
-
 
 /*
 	In order to shuffle, we'll start with the front of the deck and work our way to the back. Each card will be switched with
@@ -89,7 +87,7 @@ Deck.prototype.fillDeck = function() {
 			- find it's location
 			- switch the value of the random card with the value of the current card.
 */
-Deck.prototype.shuffle = function() {
+module.exports.Deck.prototype.shuffle = function() {
 	var indexOfRandomCardToReplace;
 	var randomCardToReplace = this.head;
 	var current = this.head;
@@ -122,16 +120,3 @@ var cards = ['2H', '2D', '2S', '2C', '3H', '3D', '3S', '3C', '4H', '4D', '4S', '
              '5S', '5C', '6H', '6D', '6S', '6C', '7H', '7D', '7S', '7C', '8H', '8D', '8S', '8C', 
              '9H', '9D', '9S', '9C', '10H', '10D', '10S', '10C', 'JH', 'JD', 'JS', 'JC', 'QH',
              'QD', 'QS', 'QC', 'KH', 'KD', 'KS', 'KC', 'AH', 'AD', 'AS', 'AC'];
-
-
-var deck1 = new Deck;
-
-deck1.isEmpty(); // true
-deck1.fillDeck(); 
-deck1.size(); // should be 52
-deck1.print(); // should display the cards in order
-deck1.shuffle(); 
-deck1.print(); // should display the shuffled cards
-
-
-
